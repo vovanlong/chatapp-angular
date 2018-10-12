@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { AuthTabsComponent } from './components/auth-tabs/auth-tabs.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthTabsComponent
   ],
   imports: [
     BrowserModule
