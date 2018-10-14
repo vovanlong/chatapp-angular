@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string;
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  showSpinnet = false;
+
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit() {
     this.init();
@@ -25,13 +28,19 @@ export class SignupComponent implements OnInit {
   }
 
   signupUser() {
+    this.showSpinnet = true;
     console.log(this.signupForm.value);
     this.authService.registerUser(this.signupForm.value).subscribe(
       data => {
         console.log(data);
+        this.signupForm.reset();
+        // this.router.navigate(['streams']);
+        setTimeout(() => {
+          this.router.navigate(['streams']);
+        }, 3000);
       },
       err => {
-        console.log(err);
+        this.showSpinnet = false;
         if (err.error.msg) {
           this.errorMessage = err.error.msg[0].message;
         }
