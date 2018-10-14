@@ -2,23 +2,26 @@
   <div class="row">
     <div class="col s10 offset-s1" id="panel">
       <h3 id="title">Sign Up</h3>
-      <form class="col s12">
+      <form class="col s12" [formGroup]="signupForm" novalidate (ngSubmit)="signupUser()">
         <div class="row">
-          <div class="input-field col s12">
-            <input id="user_name" type="text">
+          <div class="input-field col s12" >
+            <input id="user_name" type="text" formControlName="username">
             <label for="user_name">Username</label>
+            <span class="error" *ngIf="">
+
+            </span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="email" type="email">
+            <input id="email" type="email" formControlName="email">
             <label for="email">Email</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input id="password" type="password">
-            <label for="password">Password</label>
+            <input id="pass-word" type="password" formControlName="password">
+            <label for="pass-word">Password</label>
           </div>
         </div>
         <button class="btn waves-effect" id="signupbtn">SIGN UP</button>
