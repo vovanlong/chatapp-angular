@@ -15,6 +15,6 @@ export class TokenService {
   }
 
   DeleteToken() {
-    this.cookieService.delete('chat_Token');
+    this.cookieService.delete('chat_token');
   }
 }
