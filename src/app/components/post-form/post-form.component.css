@@ -1,0 +1,24 @@
+.postDiv {
+  background: linear-gradient(10deg, #ff9800, #f5700c);
+}
+
+form {
+  background-color: #fff;
+}
+
+.formDiv {
+  margin: 0px 20px 0px 20px;
+}
+
+.addImageBtn {
+  margin-bottom: 5px;
+}
+
+.postBtn {
+  float: right;
+  margin-bottom: 5px;
+}
+
+.file-field input[type='file'] {
+  width: 70% !important;
+}
