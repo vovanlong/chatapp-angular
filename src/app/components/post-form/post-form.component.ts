@@ -24,6 +24,7 @@ export class PostFormComponent implements OnInit {
     console.log(this.postForm.value);
     this.postService.addPost(this.postForm.value).subscribe(data => {
       console.log(data);
+      this.postForm.reset();
     });
   }
 }
