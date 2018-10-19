@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-.tabs .indicator{
-    background-color: #EB3013 !important;
+.tabs .indicator {
+  background-color: #eb3013 !important;
+}
+
+.btn {
+  background-color: #55b559 !important;
 }

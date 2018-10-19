@@ -44,6 +44,7 @@ export class PostsComponent implements OnInit {
       err => {
         if (err.error.token === null) {
           this.tokenService.DeleteToken();
+          this.router.navigate(['']);
         }
       }
     );
