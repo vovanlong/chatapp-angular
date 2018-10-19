@@ -12,11 +12,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommentsComponent } from '../components/comments/comments.component';
 import { RouterModule } from '@angular/router';
 import { PeopleComponent } from '../components/people/people.component';
+import { UsersService } from '../services/users.service';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule],
-  declarations: [StreamsComponent, ToolbarComponent, SideComponent, PostFormComponent, PostsComponent, CommentsComponent, PeopleComponent],
+  declarations: [
+    StreamsComponent,
+    ToolbarComponent,
+    SideComponent,
+    PostFormComponent,
+    PostsComponent,
+    CommentsComponent,
+    PeopleComponent
+  ],
   exports: [StreamsComponent],
-  providers: [TokenService, PostService]
+  providers: [TokenService, PostService, UsersService]
 })
 export class StreamsModule {}
