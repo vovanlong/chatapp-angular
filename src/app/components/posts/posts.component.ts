@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import io from 'socket.io-client';
 import _ from 'lodash';
 import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -15,7 +16,7 @@ export class PostsComponent implements OnInit {
   socket: any;
   user: any;
 
-  constructor(private postService: PostService, private tokenService: TokenService) {
+  constructor(private postService: PostService, private tokenService: TokenService, private router: Router) {
     this.socket = io('http://localhost:3000');
   }
   ngOnInit() {
@@ -29,7 +30,6 @@ export class PostsComponent implements OnInit {
   LikePost(post) {
     this.postService.addLike(post).subscribe(
       data => {
-        console.log(data);
         this.socket.emit('refresh', {});
       },
       err => console.log(err)
@@ -39,7 +39,6 @@ export class PostsComponent implements OnInit {
   AllPosts() {
     this.postService.getAllPosts().subscribe(data => {
       this.posts = data.posts;
-      console.log(data);
     });
   }
 
@@ -49,5 +48,9 @@ export class PostsComponent implements OnInit {
 
   TimeFromNow(time) {
     return moment(time).fromNow();
+  }
+
+  openCommentBox(post) {
+    this.router.navigate(['post', post._id]);
   }
 }
