@@ -33,4 +33,10 @@ export class UsersService {
   MaxNotification(id, deleteValue?): Observable<any> {
     return this.http.post(`${BASEURL}/max/${id}`, { id, deleteValue });
   }
+
+  MaxAllAsRead(): Observable<any> {
+    return this.http.post(`${BASEURL}/max-all`, {
+      all: true
+    });
+  }
 }
