@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   GetUserByName(username): Observable<any> {
-    return this.http.get(`${BASEURL}/users/${username}`);
+    return this.http.get(`${BASEURL}/username/${username}`);
   }
 
   FollowUser(userFollowed): Observable<any> {
@@ -28,5 +28,9 @@ export class UsersService {
 
   UnFollowUser(userFollowed): Observable<any> {
     return this.http.post(`${BASEURL}/unfollow-user`, { userFollowed });
+  }
+
+  MaxNotification(id, deleteValue?): Observable<any> {
+    return this.http.post(`${BASEURL}/max/${id}`, { id, deleteValue });
   }
 }

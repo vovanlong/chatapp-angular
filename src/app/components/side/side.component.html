@@ -42,7 +42,9 @@
   <li class="collection-item">
     <div>Photos<a href="#!" class="secondary-content"><i class="material-icons">photo_library</i></a></div>
   </li>
-  <li class="collection-item">
-    <div>Notification<a href="#!" class="secondary-content"><i class="material-icons">alarm</i></a></div>
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+    <a [routerLink]="['/notifications']">
+      <div>Notification<a href="#!" class="secondary-content"><i class="material-icons">alarm</i></a></div>
+    </a>
   </li>
 </ul>
