@@ -35,6 +35,13 @@
 
           <div class="cf"></div>
         </div>
+
+        <div class="left" *ngIf="typing">
+          <div class="chat-bubble left slide-left">
+            <div class="message">{{receiver}} is typing ....</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -45,7 +52,7 @@
         <div class="inputRow">
           <form (ngSubmit)="SendMessage()">
             <div class="input-field inputField col s10">
-              <textarea name="message" [(ngModel)]="message" class="materialize-textarea inputBox"></textarea>
+              <textarea name="message" [(ngModel)]="message" (keypress)="IsTyping()" class="materialize-textarea inputBox"></textarea>
             </div>
             <div class="input-field col s1 emojiDiv">
               <button class="emojiBtn">😄</button>

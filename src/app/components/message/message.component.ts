@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,13 +10,15 @@ import io from 'socket.io-client';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.css']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, AfterViewInit {
   receiver: string;
   user: any;
   message: string;
   receiverData: any;
   messagesArray = [];
   socket: any;
+  typingMessage;
+  typing = false;
 
   constructor(
     private tokenService: TokenService,
@@ -37,8 +39,28 @@ export class MessageComponent implements OnInit {
         this.GetUserByUsername(this.receiver);
       });
     });
+
+    this.socket.on('is_typing', data => {
+      if (data.sender === this.receiver) {
+        this.typing = true;
+      }
+    });
+
+    this.socket.on('has_stopped_typing', data => {
+      if (data.sender === this.receiver) {
+        this.typing = false;
+      }
+    });
   }
 
+  ngAfterViewInit() {
+    const params = {
+      room1: this.user.username,
+      room2: this.receiver
+    };
+
+    this.socket.emit('join chat', params);
+  }
   GetUserByUsername(name) {
     this.usersService.GetUserByName(name).subscribe(data => {
       this.receiverData = data.result;
@@ -62,5 +84,23 @@ export class MessageComponent implements OnInit {
           this.message = '';
         });
     }
+  }
+
+  IsTyping() {
+    this.socket.emit('start_typing', {
+      sender: this.user.username,
+      receiver: this.receiver
+    });
+
+    if (this.typingMessage) {
+      clearTimeout(this.typingMessage);
+    }
+
+    this.typingMessage = setTimeout(() => {
+      this.socket.emit('stop_typing', {
+        sender: this.user.username,
+        receiver: this.receiver
+      });
+    }, 500);
   }
 }
