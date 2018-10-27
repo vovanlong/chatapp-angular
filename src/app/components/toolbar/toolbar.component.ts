@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import * as M from 'materialize-css';
@@ -13,7 +13,9 @@ import { MessageService } from 'src/app/services/message.service';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, AfterViewInit {
+  @Output()
+  onlineUsers = new EventEmitter();
   user: any;
   socket: any;
   notifications = [];
@@ -46,12 +48,18 @@ export class ToolbarComponent implements OnInit {
       coverTrigger: false
     });
 
+    this.socket.emit('online', { room: 'global', user: this.user.username });
+
     this.GetUser();
     this.socket.on('refreshPage', () => {
       this.GetUser();
     });
   }
-
+  ngAfterViewInit() {
+    this.socket.on('usersOnline', data => {
+      this.onlineUsers.emit(data);
+    });
+  }
   ChecIfRead(arr) {
     const checkArr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -91,7 +99,6 @@ export class ToolbarComponent implements OnInit {
   GoToChatPage(name) {
     this.router.navigate(['chat', name]);
     this.msgService.MaxMessages(this.user.username, name).subscribe(data => {
-      console.log(data);
       this.socket.emit('refresh', {});
     });
   }
@@ -99,7 +106,12 @@ export class ToolbarComponent implements OnInit {
   GoToHome() {
     this.router.navigate(['streams']);
   }
-
+  maxAllMessages() {
+    this.msgService.MaxAllMessages().subscribe(data => {
+      this.socket.emit('refresh', {});
+      this.msgNumber = 0;
+    });
+  }
   maxAll() {
     this.usersService.MaxAllAsRead().subscribe(data => {
       console.log(data);

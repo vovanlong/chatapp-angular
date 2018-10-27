@@ -24,4 +24,8 @@ export class MessageService {
   MaxMessages(sender, receiver): Observable<any> {
     return this.http.get(`${BASEURL}/receiver-messages/${sender}/${receiver}`);
   }
+
+  MaxAllMessages(): Observable<any> {
+    return this.http.get(`${BASEURL}/max-all-messages`);
+  }
 }

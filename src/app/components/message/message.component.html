@@ -6,10 +6,10 @@
           <div class="col s12 imgCol">
             <img src="http://placehold.it/50x50" class="circle" alt="">
           </div>
-          <div class="row">
+          <div class="row" style="height: 60px;">
             <div class="col s10 nameCol">
               <span>{{receiver}}</span>
-              <p class="isOnline">Online</p>
+              <p class="isOnline" *ngIf="isOnline">Online</p>
             </div>
           </div>
         </div>
