@@ -23,10 +23,6 @@ export class NotificationsComponent implements OnInit {
     this.GetUser();
     this.socket.on('refreshPage', () => {
       this.GetUser();
-
-      this.socket.on('refreshPage', () => {
-        this.GetUser();
-      });
     });
   }
 
