@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
@@ -7,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import * as moment from 'moment';
 import io from 'socket.io-client';
 import _ from 'lodash';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,7 +21,12 @@ export class ToolbarComponent implements OnInit {
   chatList = [];
   msgNumber = 0;
 
-  constructor(private tokenService: TokenService, private router: Router, private usersService: UsersService) {
+  constructor(
+    private tokenService: TokenService,
+    private router: Router,
+    private usersService: UsersService,
+    private msgService: MessageService
+  ) {
     this.socket = io('http://localhost:3000');
   }
 
@@ -40,6 +45,7 @@ export class ToolbarComponent implements OnInit {
       hover: true,
       coverTrigger: false
     });
+
     this.GetUser();
     this.socket.on('refreshPage', () => {
       this.GetUser();
@@ -81,6 +87,13 @@ export class ToolbarComponent implements OnInit {
         }
       }
     );
+  }
+  GoToChatPage(name) {
+    this.router.navigate(['chat', name]);
+    this.msgService.MaxMessages(this.user.username, name).subscribe(data => {
+      console.log(data);
+      this.socket.emit('refresh', {});
+    });
   }
 
   GoToHome() {
