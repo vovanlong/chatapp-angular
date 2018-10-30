@@ -4,7 +4,8 @@
       <div class="card">
         <div class="valign-wrapper" style="background: #64b5f6 !important; margin-bottom: 200px ">
           <div class="col s12 imgCol">
-            <img src="http://placehold.it/50x50" class="circle" alt="">
+            <img *ngIf="picVersion && picId" src="https://res.cloudinary.com/dkjkd0bob/image/upload/v{{picVersion}}/{{picId}}"
+              class="imgCircle" alt="">
           </div>
           <div class="row" style="height: 60px;">
             <div class="col s10 nameCol">

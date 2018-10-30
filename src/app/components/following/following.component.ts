@@ -28,8 +28,8 @@ export class FollowingComponent implements OnInit {
   GetUser() {
     this.usersService.GetUserById(this.user._id).subscribe(
       data => {
-        console.log(data);
         this.following = data.result.following;
+        console.log(this.following);
       },
       err => {
         console.log(err);

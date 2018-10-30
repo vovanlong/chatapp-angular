@@ -8,13 +8,16 @@
     <div class="col s12 m8 19">
       <ul class="collection col s12 m10" *ngIf="notifications.length > 0">
         <li class="collection-item avatar" *ngFor="let data of notifications">
-          <img class="circle" src="http://placehold.it/50x50" alt="">
+          <img *ngIf="data.senderId" class="circle" src="https://res.cloudinary.com/dkjkd0bob/image/upload/v{{data.senderId.picVersion}}/{{data.senderId.picId}}"
+            alt="">
+          <img *ngIf="!data.senderId" class="circle" src="https://res.cloudinary.com/dkjkd0bob/image/upload/v1540753657/hxckpzxxgtvknsd2manb"
+            alt="">
           <span class="title">{{data.message}}</span>
           <a class="secondary-content">
             <i *ngIf="!data.read" class="material-icons">brightness_1</i>
             <i *ngIf="data.read" class="material-icons">panorama_fish_eye</i>
           </a>
-          <p class="time">{{TimeFromNow(data.created)}}</p>
+          <p class="time">{{TimeFromNow(data.created)}} </p>
           <div>
             <i class="material-icons" (click)="MaxNotification(data)" [ngClass]="data.read ? 'disabled' : 'notDisabled'">check</i>
             <i class="material-icons" (click)="DeleteNotification(data)">delete_forever</i>

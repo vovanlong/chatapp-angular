@@ -23,6 +23,7 @@ export class FollowersComponent implements OnInit {
       data => {
         console.log(data);
         this.followers = data.result.followers;
+        console.log(this.followers);
       },
       err => {
         console.log(err);

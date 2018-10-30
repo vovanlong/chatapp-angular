@@ -22,6 +22,10 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   count = [];
   chatList = [];
   msgNumber = 0;
+  imageId: any;
+  imageVerison: any;
+  picId: any;
+  picImage: any;
 
   constructor(
     private tokenService: TokenService,
@@ -60,6 +64,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
       this.onlineUsers.emit(data);
     });
   }
+
   ChecIfRead(arr) {
     const checkArr = [];
     for (let i = 0; i < arr.length; i++) {
@@ -78,15 +83,19 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
     this.router.navigate(['']);
   }
 
+  getImageByIdUser(id) {
+    this.usersService.GetUserById(id).subscribe(data => {});
+  }
   GetUser() {
     this.usersService.GetUserById(this.user._id).subscribe(
       data => {
+        this.imageId = data.result.picId;
+        this.imageVerison = data.result.picVersion;
         this.notifications = data.result.notifications.reverse() || '';
         const value = _.filter(this.notifications, ['read', false]);
         this.count = value;
         this.chatList = data.result.chatList;
         this.ChecIfRead(this.chatList);
-        console.log(this.msgNumber);
       },
       err => {
         if (err.error.token === null) {
@@ -96,6 +105,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
       }
     );
   }
+
   GoToChatPage(name) {
     this.router.navigate(['chat', name]);
     this.msgService.MaxMessages(this.user.username, name).subscribe(data => {
@@ -114,7 +124,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   }
   maxAll() {
     this.usersService.MaxAllAsRead().subscribe(data => {
-      console.log(data);
       this.socket.emit('refresh', {});
     });
   }

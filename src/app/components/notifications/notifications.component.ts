@@ -31,7 +31,7 @@ export class NotificationsComponent implements OnInit {
     //   console.log(data);
     // });
     this.usersService.GetUserById(this.user._id).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.notifications = data.result.notifications.reverse();
       console.log(this.notifications);
     });

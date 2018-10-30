@@ -24,6 +24,8 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   typingMessage;
   typing = false;
   isOnline = false;
+  picVersion: string;
+  picId: string;
 
   public eventMock;
   public eventPosMock;
@@ -93,6 +95,10 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   GetUserByUsername(name) {
     this.usersService.GetUserByName(name).subscribe(data => {
       this.receiverData = data.result;
+      console.log(this.receiverData);
+      this.picVersion = this.receiverData.picVersion;
+      this.picId = this.receiverData.picId;
+      console.log(this.picId, this.picVersion);
       this.GetMessages(this.user._id, data.result._id);
     });
   }
@@ -120,7 +126,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   GetMessages(senderId, receiverId) {
     this.msgService.GetAllMessages(senderId, receiverId).subscribe(data => {
       this.messagesArray = data.messages.message;
-      console.log(data);
+      console.log(this.messagesArray);
     });
   }
 
