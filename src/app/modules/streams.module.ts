@@ -24,6 +24,7 @@ import { NgxAutoScrollModule } from 'ngx-auto-scroll';
 import { EmojiPickerModule } from 'ng2-emoji-picker';
 import { ImagesComponent } from '../components/images/images.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { ViewUserComponent } from '../components/view-user/view-user.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     TopStreamsComponent,
     ChatComponent,
     MessageComponent,
-    ImagesComponent
+    ImagesComponent,
+    ViewUserComponent
   ],
   exports: [StreamsComponent],
   providers: [TokenService, PostService, UsersService, MessageService]
