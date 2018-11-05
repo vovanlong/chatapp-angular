@@ -10,10 +10,10 @@
     <div class="row">
         <div class="cl s12">
             <div class="card">
-                <!-- <div class="card-image">
-                    <img class="postImage" src="https://images.unsplash.com/photo-1539580709660-0505d36fa6e7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=df3e6c039eb1e5e32fef492bf6e3376e&auto=format&fit=crop&w=701&q=80"
+                <div class="card-image" *ngIf="post.imgId">
+                    <img class="postImage" src="http://res.cloudinary.com/dkjkd0bob/image/upload/v{{post.imgVersion}}/{{post.imgId}}"
                         alt="">
-                </div> -->
+                </div>
                 <div class="card-content">
                     <p>{{post.post}}</p>
                 </div>
