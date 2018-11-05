@@ -4,7 +4,7 @@
             alt="" class="circle">
         <span class="title">{{post.username}}</span>
         <p class="time">{{TimeFromNow(post.created)}}<br>
-            Country
+            @{{post.user.city}}, {{post.user.country}}
         </p>
     </li>
     <div class="row">

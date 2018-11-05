@@ -18,6 +18,7 @@
             <div class="card-action">
               <h3 class="card-title">
                 {{user.userFollowed.username}}
+                <p *ngIf="user.userFollowed.city">{{user.userFollowed.city}}, {{user.userFollowed.country}}</p>
               </h3>
               <button class="btn" (click)="UnFollowUser(user.userFollowed)">Unfollow</button>
             </div>
