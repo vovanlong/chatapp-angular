@@ -4,7 +4,7 @@ import { PostService } from 'src/app/services/post.service';
 import io from 'socket.io-client';
 import { FileUploader } from 'ng2-file-upload';
 
-const URL = 'http://localhost:3000/api/chatapp/upload-image';
+const URL = 'https://chatapp-longvv.herokuapp.com/api/chatapp/upload-image';
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
@@ -22,7 +22,7 @@ export class PostFormComponent implements OnInit {
   postForm: FormGroup;
 
   constructor(private fb: FormBuilder, private postService: PostService) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chatapp-longvv.herokuapp.com');
   }
 
   ngOnInit() {
@@ -71,7 +71,7 @@ export class PostFormComponent implements OnInit {
     this.ReadAsBase64(file)
       .then(result => {
         this.selectedFile = result;
-        console.log(this.selectedFile)
+        console.log(this.selectedFile);
       })
       .catch(err => console.log(err));
   }

@@ -14,7 +14,7 @@ export class FollowingComponent implements OnInit {
   socket: any;
 
   constructor(private tokenService: TokenService, private usersService: UsersService) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chatapp-longvv.herokuapp.com');
   }
 
   ngOnInit() {

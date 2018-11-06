@@ -19,7 +19,7 @@ export class PeopleComponent implements OnInit {
   online_users = [];
 
   constructor(private usersService: UsersService, private tokenService: TokenService, private router: Router) {
-    this.socket = io('http://localhost:3000');
+    this.socket = io('https://chatapp-longvv.herokuapp.com');
   }
 
   ngOnInit() {

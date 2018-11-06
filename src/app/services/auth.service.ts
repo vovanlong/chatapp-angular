@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const BASEURL = 'http://localhost:3000/api/chatapp';
+const BASEURL = 'https://chatapp-longvv.herokuapp.com/api/chatapp';
 @Injectable({
   providedIn: 'root'
 })
