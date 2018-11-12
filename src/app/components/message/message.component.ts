@@ -4,7 +4,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import io from 'socket.io-client';
-// import { CaretEvent, EmojiEvent } from 'ng2-emoji-picker';
+import { CaretEvent, EmojiEvent } from 'ng2-emoji-picker';
 import _ from 'lodash';
 
 @Component({
@@ -35,7 +35,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   public toggled = false;
   public content = '  ';
 
-  // private _lastCaretEvent: CaretEvent;
+  private _lastCaretEvent: CaretEvent;
 
   constructor(
     private tokenService: TokenService,
@@ -103,26 +103,26 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     });
   }
 
-  // HandleSelection(event: EmojiEvent) {
-  //   this.content =
-  //     this.content.slice(0, this._lastCaretEvent.caretOffset) +
-  //     event.char +
-  //     this.content.slice(this._lastCaretEvent.caretOffset);
-  //   this.eventMock = JSON.stringify(event);
+  HandleSelection(event: EmojiEvent) {
+    this.content =
+      this.content.slice(0, this._lastCaretEvent.caretOffset) +
+      event.char +
+      this.content.slice(this._lastCaretEvent.caretOffset);
+    this.eventMock = JSON.stringify(event);
 
-  //   this.message = this.content;
+    this.message = this.content;
 
-  //   this.toggled = !this.toggled;
+    this.toggled = !this.toggled;
 
-  //   this.content = '';
-  // }
+    this.content = '';
+  }
 
-  // HandleCurrentCaret(event: CaretEvent) {
-  //   this._lastCaretEvent = event;
-  //   this.eventPosMock = `{ caretOffset : ${event.caretOffset}, caretRange: Range{...}, textContent: ${
-  //     event.textContent
-  //   } }`;
-  // }
+  HandleCurrentCaret(event: CaretEvent) {
+    this._lastCaretEvent = event;
+    this.eventPosMock = `{ caretOffset : ${event.caretOffset}, caretRange: Range{...}, textContent: ${
+      event.textContent
+    } }`;
+  }
   GetMessages(senderId, receiverId) {
     this.msgService.GetAllMessages(senderId, receiverId).subscribe(data => {
       this.messagesArray = data.messages.message;
